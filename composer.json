@@ -2,6 +2,12 @@
     "name": "sourceinja/register-module",
     "description": "To register a new module from the core of sourceinja you can install this package and use it",
     "type": "project",
+    "authors": [
+        {
+            "name": "reza",
+            "email": "mr.rezakarimi99@gmail.com"
+        }
+    ]
     "keywords": [
         "sourceinja",
         "register",
@@ -18,10 +24,11 @@
             "Sourceinja\\RegisterModule\\": "src/"
         }
     },
-    "authors": [
-        {
-            "name": "reza",
-            "email": "mr.rezakarimi99@gmail.com"
+    "extra": {
+        "laravel" : {
+            "providers" : [
+                "Sourceinja\RegisterModule\RegisterModuleProvider"
+            ]
         }
-    ]
+    }
 }
