@@ -7,7 +7,7 @@
         "register",
         "module"
     ],
-    "homepage": "sourceinja.ir",
+    "homepage": "https://sourceinja.ir",
     "minimum-stability": "dev",
     "require": {
         "guzzlehttp/guzzle": "^7.7"
