@@ -1,0 +1,20 @@
+{
+    "name": "sourceinja/register-module",
+    "description": "To register a new module from the core of sourceinja you can install this package and use it",
+    "type": "project",
+    "require": {
+        "guzzlehttp/guzzle": "^7.7"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Sourceinja\\RegisterModule\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "reza",
+            "email": "mr.rezakarimi99@gmail.com"
+        }
+    ]
+}
