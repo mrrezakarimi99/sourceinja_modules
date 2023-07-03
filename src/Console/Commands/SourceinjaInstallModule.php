@@ -49,6 +49,7 @@ class SourceinjaInstallModule extends Command
      */
     public function handle()
     {
+        $this->registerModule->checkApiKey();
         $this->startCommand();
 
         $projects = $this->getProjects();

@@ -30,6 +30,7 @@ class SourceinjaListModule extends Command
     public function handle()
     {
         $registered = new RegisterModule();
+        $registered->checkApiKey();
         $group = $registered->getAllGroups();
         $sub = $registered->getSubGroups($group['id']);
         $projects = $registered->getProjects($sub['id']);
