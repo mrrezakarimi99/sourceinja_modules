@@ -1,7 +1,7 @@
 {
     "name": "sourceinja/register-module",
     "description": "To register a new module from the core of sourceinja you can install this package and use it",
-    "type": "project",
+    "type": "library",
     "authors": [
         {
             "name": "reza",
