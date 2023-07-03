@@ -28,9 +28,6 @@ class RegisterModule
         $this->cachePrefix = config('sourceinja.prefix_cache');
         $this->gitlab_url = config('sourceinja.gitlab_url');
         $this->gitlab_api_key = config('sourceinja.gitlab_api_key');
-        if (empty($this->gitlab_url) || empty($this->gitlab_api_key)) {
-            throw new SourceinjaException('Please set gitlab url and api key in config file' , 500);
-        }
     }
 
     /**
