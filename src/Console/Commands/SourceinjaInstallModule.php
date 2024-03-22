@@ -132,7 +132,7 @@ class SourceinjaInstallModule extends Command
      */
     private function registerModuleToCore($project): void
     {
-        $basePathModule = base_path('Modules');
+        $basePathModule = base_path('modules');
         $dependencies = $this->getDependencies($basePathModule , [
             'Core' , 'Example' , $project['name']
         ]);
