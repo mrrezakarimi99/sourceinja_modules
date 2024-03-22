@@ -37,7 +37,7 @@ trait InstallModule
      */
     public function checkDirectory($name , bool $temp = false): bool
     {
-        $directory = $temp ? storage_path('app/tmp') : base_path('Modules');
+        $directory = $temp ? storage_path('app/tmp') : base_path('modules');
         return file_exists($directory . '/' . $name);
     }
 
