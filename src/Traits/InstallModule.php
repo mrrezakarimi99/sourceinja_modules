@@ -53,7 +53,7 @@ trait InstallModule
         $tmpDestination = $tmpDirectory . '/' . $name;
         $this->progressBar->advance();
 
-        $moduleDirectory = base_path('Modules') . '/' . $name;
+        $moduleDirectory = base_path('modules') . '/' . $name;
         $this->progressBar->advance();
         return [$tmpDestination , $moduleDirectory];
     }
