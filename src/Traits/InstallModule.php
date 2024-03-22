@@ -91,6 +91,7 @@ trait InstallModule
     private function move(string $tmpDestination , string $moduleDirectory): void
     {
         exec("mv $tmpDestination/* $moduleDirectory > storage/logs/git.log 2>&1");
+        exec("mv $tmpDestination/.git $moduleDirectory > storage/logs/git.log 2>&1");
         exec("rm -rf $tmpDestination > storage/logs/git.log 2>&1");
     }
 }
