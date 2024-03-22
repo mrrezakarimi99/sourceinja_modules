@@ -192,7 +192,7 @@ class SourceinjaInstallModule extends Command
             $content .= "            ] ,\n";
             $content .= "        ] ,\n";
             $content .= "        'view'         => [\n";
-            $content .= "            'path' => 'Modules/$this->moduleName/Resources/views' ,\n";
+            $content .= "            'path' => 'Modules/$name/Resources/views' ,\n";
             $content .= "        ] ,\n";
             if (count($dependencies) > 0) {
                 $content .= "        'dependencies' => [\n";
