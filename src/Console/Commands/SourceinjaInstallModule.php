@@ -191,6 +191,9 @@ class SourceinjaInstallModule extends Command
             $content .= "                'name' => '$lowerName' ,\n";
             $content .= "            ] ,\n";
             $content .= "        ] ,\n";
+            $content .= "        'view'         => [\n";
+            $content .= "            'path' => 'Modules/$this->moduleName/Resources/views' ,\n";
+            $content .= "        ] ,\n";
             if (count($dependencies) > 0) {
                 $content .= "        'dependencies' => [\n";
                 foreach ($dependencies as $dependency) {
