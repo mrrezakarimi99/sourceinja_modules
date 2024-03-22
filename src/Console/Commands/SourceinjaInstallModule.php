@@ -185,7 +185,7 @@ class SourceinjaInstallModule extends Command
             $content .= "        'description' => '" . $name . " Module' ,\n";
             $content .= "        'status'      => true ,\n";
             $content .= "        'services'    => [\n";
-            $content .= "            'provider' => 'Modules\\\\$name\\\\" . $name . "ServiceProvider' ,\n";
+            $content .= "            'provider' => 'Modules\\\\$name\\\\Providers\\$name" . "ServiceProvider' ,\n";
             $content .= "            'lang' => [\n";
             $content .= "                'path' => 'Modules/$name/lang' ,\n";
             $content .= "                'name' => '$lowerName' ,\n";
