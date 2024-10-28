@@ -139,6 +139,8 @@ class SourceinjaInstallModule extends Command
         $this->progressBar->advance();
 
         $this->registerConfig($basePathModule , $project['name'] , $dependencies);
+
+        $this->registerModule($project);
     }
 
     /**
@@ -208,5 +210,21 @@ class SourceinjaInstallModule extends Command
             file_put_contents($basePathModule . '/Core/Config/' . $file , $content);
             $this->progressBar->advance();
         }
+    }
+
+    private function registerModule(array $project): void
+    {
+        $url = $project['http_url_to_repo'];
+        $name = $project['name'];
+        $gitModules = file_get_contents(base_path('.gitmodules'));
+        $gitModules .= "[submodule \"modules/$name\"]\n";
+        $gitModules .= "    path = modules/$name\n";
+        $gitModules .= "    url = $url\n";
+        $gitModules .= "    branch = development\n";
+        file_put_contents(base_path('.gitmodules'), $gitModules);
+        chdir(base_path());
+        $output = [];
+        exec('git submodule add '. $url .' modules/' . $name, $output);
+        file_put_contents(storage_path('logs/git.log'), $output);
     }
 }

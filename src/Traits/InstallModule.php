@@ -80,7 +80,11 @@ trait InstallModule
      */
     private function clone($url , string $directory): void
     {
-        exec("git clone $url $directory > storage/logs/git.log 2>&1");
+        $portocol = parse_url($url, PHP_URL_SCHEME);
+        $host = parse_url($url, PHP_URL_HOST);
+        $path = parse_url($url, PHP_URL_PATH);
+        $token = config('sourceinja.gitlab_api_key');
+        exec("git clone $portocol://oauth2:$token@$host$path $directory > storage/logs/git.log");
     }
 
     /**

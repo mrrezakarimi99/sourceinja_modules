@@ -40,7 +40,10 @@ class RegisterModule
         } else {
             $response = Http::withHeaders([
                 'PRIVATE-TOKEN' => $this->gitlab_api_key
-            ])->get($this->gitlab_url . '/groups');
+            ])->get($this->gitlab_url . '/groups?search=sourceInja');
+            if ($response->status() != 200) {
+                throw new SourceinjaException('Error in get groups from gitlab' , $response->status());
+            }
             $response = $response->json();
             Cache::put($this->cachePrefix . 'groups' , $response , 3600);
         }
@@ -58,7 +61,7 @@ class RegisterModule
         } else {
             $response = Http::withHeaders([
                 'PRIVATE-TOKEN' => $this->gitlab_api_key
-            ])->get($this->gitlab_url . "/groups/$id/subgroups");
+            ])->get($this->gitlab_url . "/groups/$id/subgroups?search=modules");
             $response = $response->json();
             Cache::put($this->cachePrefix . 'sub_groups' , $response , 3600);
         }
@@ -77,7 +80,7 @@ class RegisterModule
         } else {
             $response = Http::withHeaders([
                 'PRIVATE-TOKEN' => $this->gitlab_api_key
-            ])->get($this->gitlab_url . "/groups/$id/projects");
+            ])->get($this->gitlab_url . "/groups/$id/projects?per_page=100");
             $response = $response->json();
             Cache::put($this->cachePrefix . 'projects' , $response , 3600);
         }
