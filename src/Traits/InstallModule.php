@@ -14,6 +14,7 @@ trait InstallModule
     {
         $url = $project[$urlPortocol] ?? $project['http_url_to_repo'];
         $name = $project['name'];
+        $name = ucfirst($name);
 
         [$tmpDestination, $moduleDirectory] = $this->getDirectories($name);
 
@@ -30,7 +31,7 @@ trait InstallModule
     }
 
     /**
-     * @param      $name
+     * @param $name
      * @param bool $temp
      *
      * @return bool
@@ -76,7 +77,7 @@ trait InstallModule
     }
 
     /**
-     * @param        $url
+     * @param $url
      * @param string $directory
      *
      * @return void

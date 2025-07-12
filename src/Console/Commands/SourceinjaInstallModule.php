@@ -103,9 +103,11 @@ class SourceinjaInstallModule extends Command
      */
     public function getModuleFromUser($projects): array
     {
-        $options = $projects->map(function ($project) {
-            return $project['name'];
-        })->toArray();
+        $options = $projects->map(
+            function ($project) {
+                return $project['name'];
+            }
+        )->toArray();
         $this->progressBar->advance();
 
         $project = $this->choice('Please select project to install', $options);
@@ -124,9 +126,11 @@ class SourceinjaInstallModule extends Command
 
     public function getBranchFromUser($branches): string
     {
-        $options = collect($branches)->map(function ($branch) {
-            return $branch['name'];
-        })->toArray();
+        $options = collect($branches)->map(
+            function ($branch) {
+                return $branch['name'];
+            }
+        )->toArray();
         $this->progressBar->advance();
 
         $branch = $this->choice('Please select branch to install', $options);
@@ -153,11 +157,13 @@ class SourceinjaInstallModule extends Command
     private function registerModuleToCore($project, $branch, $urlPortocol): void
     {
         $basePathModule = base_path('modules');
-        $dependencies = $this->getDependencies($basePathModule, [
-            'Core', 'Example', $project['name'],
-        ]);
+        $dependencies = $this->getDependencies(
+            $basePathModule, [
+            'Core', 'Example', ucfirst($project['name']),
+            ]
+        );
         $this->progressBar->advance();
-        $this->registerConfig($basePathModule, $project['name'], $dependencies);
+        $this->registerConfig($basePathModule, ucfirst($project['name']), $dependencies);
         $this->registerModule($project, $branch, $urlPortocol);
     }
 
@@ -170,9 +176,11 @@ class SourceinjaInstallModule extends Command
     public function getDependencies($basePathModule, $ignore): array
     {
         $listOfModules = scandir($basePathModule);
-        $listOfModules = array_filter($listOfModules, function ($item) {
-            return !in_array($item, ['.', '..']);
-        });
+        $listOfModules = array_filter(
+            $listOfModules, function ($item) {
+                return !in_array($item, ['.', '..']);
+            }
+        );
         $listOfModules = array_diff($listOfModules, $ignore);
         if (count($listOfModules) >= 1) {
             return $this->choice('Please select dependencies (separate with comma)', $listOfModules, null, null, true);
@@ -182,8 +190,8 @@ class SourceinjaInstallModule extends Command
     }
 
     /**
-     * @param       $basePathModule
-     * @param       $name
+     * @param $basePathModule
+     * @param $name
      * @param array $dependencies
      *
      * @return void
@@ -235,7 +243,7 @@ class SourceinjaInstallModule extends Command
     private function registerModule(array $project, string $branch, string $urlPortocol): void
     {
         $url = $project['ssh_url_to_repo'];
-        $name = $project['name'];
+        $name = ucfirst($project['name']);
 
         $gitModules = file_exists(base_path('.gitmodules')) ? file_get_contents(base_path('.gitmodules')) : '';
         $gitModules .= "[submodule \"modules/$name\"]\n";
