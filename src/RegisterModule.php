@@ -173,6 +173,33 @@ class RegisterModule
         });
     }
 
+    public function getBranches($project): array
+    {
+        $response = Http::withHeaders([
+            'PRIVATE-TOKEN' => $this->gitlab_api_key
+        ])->get($this->gitlab_url . "/projects/{$project['id']}/repository/branches");
+        if ($response->status() != 200) {
+            throw new SourceinjaException('Error in get branches from gitlab', $response->status());
+        }
+
+        return $this->mapBranches($response->json());
+    }
+
+    /**
+     * @param $branches
+     * @return array
+     */
+    public function mapBranches($branches): array
+    {
+        return collect($branches)->map(function ($branch) {
+            return [
+                'name' => $branch['name'],
+                'last_commit_id' => $branch['commit']['short_id'],
+                'last_commit_title' => $branch['commit']['title'],
+            ];
+        })->toArray();
+    }
+
     /**
      * @throws SourceinjaException
      */
