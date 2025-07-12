@@ -83,7 +83,7 @@ trait InstallModule
         $portocol = parse_url($url, PHP_URL_SCHEME);
         $host = parse_url($url, PHP_URL_HOST);
         $path = parse_url($url, PHP_URL_PATH);
-        $token = config('sourceinja.gitlab_api_key'); 
+        $token = config('sourceinja.gitlab.api_key');
         exec("git clone $portocol://oauth2:$token@$host$path $directory > storage/logs/git.log");
     }
 

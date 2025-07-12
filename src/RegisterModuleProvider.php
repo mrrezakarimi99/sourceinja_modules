@@ -4,23 +4,26 @@ namespace Sourceinja\RegisterModule;
 
 use Illuminate\Support\ServiceProvider;
 use Sourceinja\RegisterModule\Console\Commands\SourceinjaInstallModule;
-use Sourceinja\RegisterModule\Console\Commands\SourceinjaListModule;
+use Sourceinja\RegisterModule\Console\Commands\SourceinjaListModules;
 
 class RegisterModuleProvider extends ServiceProvider
 {
-    /**
-     * Bootstrap services.
-     *
-     * @return void
-     */
     public function boot()
     {
-        $this->mergeConfigFrom(__DIR__ . '/Config/sourceinja.php' , 'sourceinja');
-        $this->commands([
-            SourceinjaListModule::class ,
-            SourceinjaInstallModule::class
-        ]);
+        $this->publishes([
+            __DIR__ . '/Config/sourceinja.php' => config_path('sourceinja.php'),
+        ], 'config');
 
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                SourceinjaInstallModule::class,
+                SourceinjaListModules::class,
+            ]);
+        }
+    }
 
+    public function register()
+    {
+        $this->mergeConfigFrom(__DIR__ . '/Config/sourceinja.php', 'sourceinja');
     }
 }
